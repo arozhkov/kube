@@ -241,6 +241,16 @@ kubectl exec nginx-3449338310-0ir9g -c nginx -i -t -- bash -il
 cat /etc/resolv.conf
 ping frontend
 timeout 2 bash -c "</dev/tcp/frontend/80"; echo $?  
+```
 
+# From Admin server
+```
+kubectl describe svc frontend
+kubectl scale deployment nginx --replicas=0
+
+kubectl describe svc frontend
+kubectl scale deployment nginx --replicas=4
+
+kubectl run curl --image=radial/busyboxplus:curl -i --tty
 ```
 
